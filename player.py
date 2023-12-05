@@ -28,5 +28,7 @@ class Player:
         if self.can_move(dx, dy):
             self.x += dx
             self.y += dy
+    def reset_position(self):
+        self.x, self.y = self.find_start()
 
     # Add any additional methods for dungeon-specific interactions

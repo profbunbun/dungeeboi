@@ -10,6 +10,8 @@ RED = (255, 0, 0)
 BLUE = (0, 0, 255)
 YELLOW = (255, 255, 0)
 GREY = (111, 111, 111)
+UP_STAIRS_COLOR = (0, 255, 255)  # Cyan for upstairs
+DOWN_STAIRS_COLOR = (255, 165, 0) 
 
 class Dungeon:
     def __init__(self, filename):
@@ -44,6 +46,10 @@ class Dungeon:
                     color = YELLOW  # Doors
                 elif cell == 'S':
                     color = RED  # Stairs
+                elif cell == 'U':
+                    color = UP_STAIRS_COLOR  # Upstairs
+                elif cell == 'D':
+                    color = DOWN_STAIRS_COLOR  # Downstairs
 
                 pygame.draw.rect(self.window, color, (x * self.square_size, y * self.square_size, self.square_size, self.square_size))
 
@@ -53,3 +59,6 @@ class Dungeon:
 
     def is_exit(self, x, y):
         return self.dungeon[y][x] == 'S' 
+
+    def reset_dungeon(self, filename):
+        self.load_dungeon(filename)

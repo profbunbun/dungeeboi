@@ -1,16 +1,19 @@
 import pygame
 import sys
-from dungeon import Dungeon  # Import the Dungeon class from your dungeon script
-from player import Player  # Import the Player class (ensure it's compatible with Dungeon)
 
-# Initialize pygame
+from dungeon import Dungeon  
+from player import Player  
+
+# List of dungeon filenames
+dungeon_filenames = ["dungeon_floor_1.txt", "dungeon_floor_2.txt", "dungeon_floor_3.txt", "dungeon_floor_4.txt", "dungeon_floor_5.txt"]
+current_floor = 0
+
 pygame.init()
 
-# Create a Dungeon and Player instance
-dungeon = Dungeon("dungeon.txt")
-player = Player(dungeon)  # Make sure the Player class is adapted for Dungeon
+# Load the first dungeon
+dungeon = Dungeon(dungeon_filenames[current_floor])
+player = Player(dungeon) 
 
-# Main loop
 running = True
 while running:
     for event in pygame.event.get():
@@ -29,8 +32,15 @@ while running:
     dungeon.draw_dungeon(player.x, player.y)
 
     if dungeon.is_exit(player.x, player.y):
-        print("Congratulations! You've found the stairs!")
-        break
+        current_floor += 1
+        if current_floor < len(dungeon_filenames):
+            print(f"Moving to floor {current_floor + 1}")
+            dungeon.reset_dungeon(dungeon_filenames[current_floor])
+            player.reset_position()
+            player.dungeon = dungeon
+        else:
+            print("Congratulations! You've completed the dungeon!")
+            break
 
 # Quit pygame
 pygame.quit()
