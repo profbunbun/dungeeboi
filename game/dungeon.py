@@ -58,7 +58,7 @@ class Dungeon:
         pygame.display.update()
 
     def is_exit(self, x, y):
-        return self.dungeon[y][x] == 'S' 
+        return self.dungeon[y][x] in ['U', 'D']
 
     def reset_dungeon(self, filename):
         self.load_dungeon(filename)
