@@ -1,8 +1,8 @@
 import random
 
 # Define dungeon dimensions (m x n)
-m = 20
-n = 20
+m = 41
+n = 41
 num_floors = 5  # Total number of floors
 
 def generate_floor(m, n, floor_num, num_floors):

@@ -1,8 +1,8 @@
 import pygame
 import sys
 
-from game.dungeon import Dungeon  
-from game.player import Player  
+from game.levels.dungeon import Dungeon  
+from game.entities.player import Player  
 
 # List of dungeon filenames
 dungeon_filenames = ["dungeon_floor_1.txt", "dungeon_floor_2.txt", "dungeon_floor_3.txt", "dungeon_floor_4.txt", "dungeon_floor_5.txt"]
@@ -28,6 +28,8 @@ while running:
                 player.move(1, 0)
 
     dungeon.draw_dungeon(player.x, player.y)
+    print(f"Player Position: {player.x}, {player.y}")
+
 
     # Check if the player is on the stairs and not just transported
     if dungeon.is_exit(player.x, player.y) and not player.just_transported:
@@ -38,7 +40,7 @@ while running:
             current_floor -= 1
 
         if 0 <= current_floor < len(dungeon_filenames):
-            dungeon.reset_dungeon(dungeon_filenames[current_floor])
+            dungeon.reset_dungeon( dungeon_filenames[current_floor])
             player.dungeon = dungeon
             new_stair_type = 'D' if stair_type == 'U' else 'U'
             stairs_position = player.find_stairs(new_stair_type)
